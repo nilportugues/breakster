@@ -18,6 +18,7 @@ export const BuyButton: ComponentType<Props> = () => {
             <button>buy</button>
             <div>
               <div>Buy as</div>
+              
               <UserInfo />
             </div>
           </div>

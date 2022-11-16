@@ -3,26 +3,51 @@
     <title></title>
   </head>
   <body>
-    <div b-comp b-dialect="typescript" b-name="IndexPage">
+    <div b-comp b-name="IndexPage">
       <div b-comp b-name="Layout">
+
         <header>
           <div>User</div>
+
           <div b-comp b-name="UserInfo">
             <div class="user-info-class">Username: Alan</div>
           </div>
+
         </header>
+
         <div b-comp b-name="Product">
           <div>Product name</div>
           <div>Product price</div>
           <div>Product count</div>
-          <div b-comp b-jsx-lib="react" b-name="BuyButton">
+
+          <div b-comp b-name="BuyButton">
             <button>buy</button>
             <div>
               <div>Buy as</div>
+              
               <div b-comp b-name="UserInfo"></div>
             </div>
           </div>
+
         </div>
+
+        <table b-comp b-name="Table">
+          <thead>
+            <tr>
+              <td>Header first</td>
+              <td>Header second</td>
+              <td>Header third</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr b-comp b-name="TableRow">
+              <td>First</td>
+              <td>Second</td>
+              <td>Third</td>
+            </tr>
+          </tbody>
+        </table>
+
         <table b-comp b-name="Table">
           <thead>
             <tr>

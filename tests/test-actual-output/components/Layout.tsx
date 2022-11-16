@@ -17,11 +17,18 @@ export const Layout: ComponentType<Props> = () => {
       
     return (
       <div>
+
         <header>
           <div>User</div>
+
           <UserInfo />
+
         </header>
+
         <Product />
+
+        <Table />
+
         <Table />
       </div>
     );  

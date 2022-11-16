@@ -1,7 +1,7 @@
 {
-  "name": "breakster",
+  "name": "@nilportugues/breakster",
   "version": "0.1.6",
-  "description": "Tool that breaks your html into `reacty` (React, Preact) components, saving their code into files. Imports of children components, JSX with children components, etc - you're all set.",
+  "description": "Tool that breaks your html into React components, saving their code into files.",
   "main": "index.js",
   "scripts": {
     "build": "tsc -p \"./src\" -w",
@@ -9,7 +9,7 @@
   },
   "repository": "https://github.com/nilportugues/breakster",
   "bin": "dist/index.js",
-  "author": "idchlife",
+  "author": "nilportugues",
   "license": "MIT",
   "dependencies": {
     "async-file": "^2.0.2",
@@ -20,6 +20,7 @@
     "@types/jsdom": "^2.0.30",
     "@types/minimist": "^1.2.0",
     "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
     "ava": "^0.19.0",
     "del": "^2.2.2",
     "react": "^18.2.0",

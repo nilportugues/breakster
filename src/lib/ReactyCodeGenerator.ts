@@ -173,8 +173,12 @@ export default class ReactyCodeGenerator implements ComponentCodeGeneratorInterf
     let el = component.getEl();
 
     component.getChildren().forEach(function gatheringImportAndReplacingElement(c) {
-      additionalImports += `
+
+      if (!additionalImports.includes(`import { ${c.getName()} } from "./${c.getName()}"`)) {
+        additionalImports += `
 import { ${c.getName()} } from "./${c.getName()}"`;
+      }
+      
 
       const componentElement = el.querySelector(`[${ATTR_ID}="${c.getId()}"]`);
 

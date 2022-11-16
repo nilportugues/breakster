@@ -164,7 +164,9 @@ var ReactyCodeGenerator = /** @class */ (function () {
         var replacements = [];
         var el = component.getEl();
         component.getChildren().forEach(function gatheringImportAndReplacingElement(c) {
-            additionalImports += "\nimport { ".concat(c.getName(), " } from \"./").concat(c.getName(), "\"");
+            if (!additionalImports.includes("import { ".concat(c.getName(), " } from \"./").concat(c.getName(), "\""))) {
+                additionalImports += "\nimport { ".concat(c.getName(), " } from \"./").concat(c.getName(), "\"");
+            }
             var componentElement = el.querySelector("[".concat(VirtualComponent_1.ATTR_ID, "=\"").concat(c.getId(), "\"]"));
             if (!componentElement) {
                 throw new CannotFindElementForComponentError("Was trying to find element with ".concat(VirtualComponent_1.ATTR_ID, "=").concat(c.getId(), " from component ").concat(c.getName(), ". Could not find."));

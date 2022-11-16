@@ -17,8 +17,9 @@ test.before(async t => {
 
 test(async t => {
   const b = new Builder(
-    __dirname + '/entry1.html',
-    __dirname + '/test-actual-output'
+    `${__dirname}/entry1.html`,
+    `${__dirname}/test-actual-output`,
+    false
   );
 
   console.log('starting build');
@@ -40,7 +41,7 @@ test(async t => {
   let fileNotThere = false;
 
   filesToBeThere.forEach(async name => {
-    const filePath = __dirname + `/../test-actual-output/${name}`;
+    const filePath = `${__dirname}/../test-actual-output/${name}`;
     const isThere = await fs.exists(filePath);
 
     if (!isThere) {

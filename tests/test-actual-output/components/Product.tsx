@@ -18,7 +18,9 @@ export const Product: ComponentType<Props> = () => {
           <div>Product name</div>
           <div>Product price</div>
           <div>Product count</div>
+
           <BuyButton />
+
         </div>
     );  
 }
