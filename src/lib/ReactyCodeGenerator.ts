@@ -43,7 +43,7 @@ abstract class ReactyLibrary {
   
   getGenericAfterExtend() {
     if (this.dialect instanceof TypeScript) {
-      return "<Props, State>";
+      return "<Props>";
     }
 
     return "";
@@ -57,8 +57,9 @@ abstract class ReactyLibrary {
   getBeforComponentDeclarationCode?(): string {
     if (this.dialect instanceof TypeScript) {
       return `
-interface Props {}
-interface State {}
+type Props = {
+
+}
 `
     }
 
@@ -71,28 +72,6 @@ interface State {}
 
   public getDialect(): Dialect {
     return this.dialect;
-  }
-}
-
-class PreactLibrary extends ReactyLibrary {
-  private component: VirtualComponentInterface;
-
-  constructor(c: VirtualComponentInterface) {
-    super();
-
-    this.component = c;
-  }
-
-  getFactoryFunctionName() {
-    return "h";
-  }
-
-  getName() {
-    return "preact";
-  }
-
-  getRenderArguments(): string {
-    return "props, state";
   }
 }
 
@@ -116,12 +95,6 @@ abstract class Dialect {
   }
 }
 
-class JavaScript extends Dialect {
-  public static getAttrValue(): string {
-    return "javascript";
-  }
-}
-
 class TypeScript extends Dialect {
   public getFileExtension(): string {
     return "tsx";
@@ -133,12 +106,10 @@ class TypeScript extends Dialect {
 }
 
 const JSX_ATTR_LIB = {
-  "preact": PreactLibrary,
   "react": ReactLibrary
 }
 
 const DIALECT_ATTR_LIB = {
-  [JavaScript.getAttrValue()]: JavaScript,
   [TypeScript.getAttrValue()]: TypeScript
 }
 
@@ -168,36 +139,10 @@ export default class ReactyCodeGenerator implements ComponentCodeGeneratorInterf
     
     // Trying to find dialect from parent components
 
-    let dialect: Dialect;
-
-    if (dialectAttrValue) {
-      if (!DIALECT_ATTR_LIB[dialectAttrValue]) {
-        throw new InvalidOptionsError(
-          `Invalid dialect via ${ATTR_DIALECT} attribute, allowed dialects: ${Object.keys(DIALECT_ATTR_LIB)}`
-        )
-      }
-
-      dialect = new DIALECT_ATTR_LIB[dialectAttrValue]();
-    } else {
-      dialect = new JavaScript();
-    }
-
+    let dialect = new TypeScript();
     const jsxLibName = el.getAttribute(ATTR_JSX_LIB);
-
-    if (jsxLibName) {
-      if (!JSX_ATTR_LIB[jsxLibName]) {
-        throw new InvalidOptionsError(
-          `Element specified ${jsxLibName} in attribute ${ATTR_JSX_LIB}, but it was not valid.
-Valid options are: ${Object.keys(JSX_ATTR_LIB)}`
-        );
-      }
-
-      this.library = new JSX_ATTR_LIB[jsxLibName]();
-    } else {
-      // This is the default
-      this.library = new PreactLibrary(c);
-    }
-
+    this.library = new ReactLibrary(c);
+   
     if (this.library.provideDialect) {
       this.library.provideDialect(dialect);
     }
@@ -284,13 +229,13 @@ import { ${this.library.getFactoryFunctionName()}, Component } from "${this.libr
 
 ${l.getBeforComponentDeclarationCode()}
 
-export default class ${component.getName()} extends Component${l.getGenericAfterExtend()} {
-  render(${l.getRenderArguments()}) {
+export const ${component.getName()}: ComponentType${l.getGenericAfterExtend() = (${l.getRenderArguments()}) => {
+  
     ${l.getBeforeRenderReturnCode()}
+      
     return (
       ${jsx}
-    );
-  }
+    );  
 }
 `;
   }
