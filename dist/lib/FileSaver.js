@@ -1,31 +1,37 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t;
-    return { next: verb(0), "throw": verb(1), "return": verb(2) };
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -45,25 +51,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+exports.ComponentFileSaver = void 0;
 var fs = require("async-file");
-var FolderCannotBeAccessedError = (function (_super) {
+var FolderCannotBeAccessedError = /** @class */ (function (_super) {
     __extends(FolderCannotBeAccessedError, _super);
     function FolderCannotBeAccessedError() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return FolderCannotBeAccessedError;
 }(Error));
-var SavingToFileError = (function (_super) {
+var SavingToFileError = /** @class */ (function (_super) {
     __extends(SavingToFileError, _super);
     function SavingToFileError() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return SavingToFileError;
 }(Error));
-var ComponentFileSaver = (function () {
+var ComponentFileSaver = /** @class */ (function () {
     function ComponentFileSaver() {
     }
-    ComponentFileSaver.prototype.save = function (dir, g) {
+    ComponentFileSaver.prototype.save = function (dir, g /* , t: TestComponentCodeGeneratorInterface */) {
         return __awaiter(this, void 0, void 0, function () {
             var originalDir, saveToDir, folderExists, e_1, fileName, filePath, e_2;
             return __generator(this, function (_a) {
@@ -73,18 +80,18 @@ var ComponentFileSaver = (function () {
                         if (originalDir[originalDir.length - 1] === "/") {
                             originalDir = originalDir.slice(0, originalDir.length - 1);
                         }
-                        saveToDir = originalDir + "/components";
+                        saveToDir = "".concat(originalDir, "/components");
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 6, , 7]);
                         return [4 /*yield*/, fs.stat(originalDir)];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, fs.exists(originalDir + "/components")];
+                        return [4 /*yield*/, fs.exists("".concat(originalDir, "/components"))];
                     case 3:
                         folderExists = _a.sent();
                         if (!!folderExists) return [3 /*break*/, 5];
-                        return [4 /*yield*/, fs.mkdir(originalDir + "/components")];
+                        return [4 /*yield*/, fs.mkdir("".concat(originalDir, "/components"))];
                     case 4:
                         _a.sent();
                         _a.label = 5;
@@ -92,22 +99,23 @@ var ComponentFileSaver = (function () {
                     case 6:
                         e_1 = _a.sent();
                         console.error(e_1);
-                        throw new FolderCannotBeAccessedError("Tried to access folder " + saveToDir + ", but apparently it doesn't exist or not accessible. More info: above");
+                        throw new FolderCannotBeAccessedError("Tried to access folder ".concat(saveToDir, ", but apparently it doesn't exist or not accessible. More info: above"));
                     case 7:
-                        fileName = g.getComponent().getName() + "." + g.getFileExtension();
-                        filePath = saveToDir + "/" + fileName;
+                        fileName = "".concat(g.getComponent().getName(), ".").concat(g.getFileExtension());
+                        filePath = "".concat(saveToDir, "/").concat(fileName);
                         _a.label = 8;
                     case 8:
                         _a.trys.push([8, 10, , 11]);
                         return [4 /*yield*/, fs.writeFile(filePath, g.generate())];
                     case 9:
                         _a.sent();
-                        console.log("Saved " + filePath);
+                        //await fs.writeFile(filePath, t.generate());
+                        console.log("Saved ".concat(filePath));
                         return [3 /*break*/, 11];
                     case 10:
                         e_2 = _a.sent();
                         console.error(e_2);
-                        throw new SavingToFileError("Error saving to " + filePath + ". More - above this error.");
+                        throw new SavingToFileError("Error saving to ".concat(filePath, ". More - above this error."));
                     case 11: return [2 /*return*/];
                 }
             });

@@ -1,24 +1,30 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
 exports.__esModule = true;
+exports.ATTR_JSX_LIB = exports.ATTR_DIALECT = exports.DEFAULT_COMPONENT_ATTR_NAME = exports.ATTR_ID = exports.ATTR_NAME = void 0;
 var ReactyCodeGenerator_1 = require("./ReactyCodeGenerator");
-var VirtualComponentParsingError = (function (_super) {
+var VirtualComponentParsingError = /** @class */ (function (_super) {
     __extends(VirtualComponentParsingError, _super);
     function VirtualComponentParsingError() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return VirtualComponentParsingError;
 }(Error));
-var VirtualComponentInvalidElementError = (function (_super) {
+var VirtualComponentInvalidElementError = /** @class */ (function (_super) {
     __extends(VirtualComponentInvalidElementError, _super);
     function VirtualComponentInvalidElementError() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -26,7 +32,7 @@ var VirtualComponentInvalidElementError = (function (_super) {
     return VirtualComponentInvalidElementError;
 }(Error));
 ;
-var VirtualComponentInitializationError = (function (_super) {
+var VirtualComponentInitializationError = /** @class */ (function (_super) {
     __extends(VirtualComponentInitializationError, _super);
     function VirtualComponentInitializationError() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -39,7 +45,7 @@ exports.ATTR_ID = "b-id";
 exports.DEFAULT_COMPONENT_ATTR_NAME = "b-comp";
 exports.ATTR_DIALECT = "b-dialect";
 exports.ATTR_JSX_LIB = "b-jsx-lib";
-var VirtualComponent = (function () {
+var VirtualComponent = /** @class */ (function () {
     function VirtualComponent(el, componentAttr, codeGenerator) {
         if (codeGenerator === void 0) { codeGenerator = new ReactyCodeGenerator_1["default"](); }
         // Innter components
@@ -108,10 +114,10 @@ var VirtualComponent = (function () {
     };
     VirtualComponent.prototype.validateRootElement = function (el) {
         if (!el) {
-            throw new VirtualComponentInvalidElementError("Element does not appear to be valid. Type of this element: " + typeof el);
+            throw new VirtualComponentInvalidElementError("Element does not appear to be valid. Type of this element: ".concat(typeof el));
         }
         if (!el.getAttribute(exports.ATTR_NAME)) {
-            throw new VirtualComponentParsingError("Component does not have attr " + exports.ATTR_NAME + " or attribute has empty value!\n\n" + exports.ATTR_NAME + " value: " + el.getAttribute(exports.ATTR_NAME) + "\n\nAttributes: " + el.attributes + "\n\nHtml of this element (without children): " + el.cloneNode().outerHTML + "\n");
+            throw new VirtualComponentParsingError("Component does not have attr ".concat(exports.ATTR_NAME, " or attribute has empty value!\n\n").concat(exports.ATTR_NAME, " value: ").concat(el.getAttribute(exports.ATTR_NAME), "\n\nAttributes: ").concat(el.attributes, "\n\nHtml of this element (without children): ").concat(el.cloneNode().outerHTML, "\n"));
         }
     };
     VirtualComponent.prototype.parseRootHTMLElement = function () {
@@ -130,7 +136,7 @@ var VirtualComponent = (function () {
                         return;
                     }
                     // Finding first occurence of element in children of this child
-                    var foundElement = el.querySelector("[" + this.componentAttr + "]");
+                    var foundElement = el.querySelector("[".concat(this.componentAttr, "]"));
                     if (foundElement) {
                         discoveredComponentRoots_1.push(foundElement);
                     }
@@ -146,7 +152,7 @@ var VirtualComponent = (function () {
         }
         catch (e) {
             console.error(e);
-            throw new VirtualComponentParsingError("Error occured while parsing element in VirtualComponent named " + this.getName() + ". More info above this error.");
+            throw new VirtualComponentParsingError("Error occured while parsing element in VirtualComponent named ".concat(this.getName(), ". More info above this error."));
         }
     };
     VirtualComponent.prototype.generateUniqueId = function () {

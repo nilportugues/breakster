@@ -1,16 +1,18 @@
 
-import { h, Component } from "preact";
+import * as React from "react";
+import type { ComponentType } from "react";
 
 
-interface Props {}
-interface State {}
+type Props = {
+
+}
 
 
-export default class UserInfo extends Component<Props, State> {
-  render(props, state) {
+export const UserInfo: ComponentType<Props> = () => {
+  
     
+      
     return (
       <div></div>
-    );
-  }
+    );  
 }

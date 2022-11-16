@@ -1,19 +1,21 @@
 
-import { h, Component } from "preact";
-import Layout from "./Layout"
+import * as React from "react";
+import type { ComponentType } from "react";
+import { Layout } from "./Layout"
 
 
-interface Props {}
-interface State {}
+type Props = {
+
+}
 
 
-export default class IndexPage extends Component<Props, State> {
-  render(props, state) {
+export const IndexPage: ComponentType<Props> = () => {
+  
     
+      
     return (
       <div>
       <Layout />
     </div>
-    );
-  }
+    );  
 }

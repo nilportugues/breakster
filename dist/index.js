@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+exports.VirtualComponent = exports.Builder = void 0;
 var builder_1 = require("./lib/builder");
 exports.Builder = builder_1["default"];
 var VirtualComponent_1 = require("./lib/VirtualComponent");

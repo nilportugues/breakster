@@ -1,15 +1,18 @@
 
-import { React, Component } from "React";
-import UserInfo from "./UserInfo"
+import * as React from "react";
+import type { ComponentType } from "react";
+import { UserInfo } from "./UserInfo"
 
 
-interface Props {}
-interface State {}
+type Props = {
+
+}
 
 
-export default class BuyButton extends Component<Props, State> {
-  render() {
+export const BuyButton: ComponentType<Props> = () => {
+  
     
+      
     return (
       <div>
             <button>buy</button>
@@ -18,6 +21,5 @@ export default class BuyButton extends Component<Props, State> {
               <UserInfo />
             </div>
           </div>
-    );
-  }
+    );  
 }

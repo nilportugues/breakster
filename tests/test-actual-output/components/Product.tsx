@@ -1,15 +1,18 @@
 
-import { h, Component } from "preact";
-import BuyButton from "./BuyButton"
+import * as React from "react";
+import type { ComponentType } from "react";
+import { BuyButton } from "./BuyButton"
 
 
-interface Props {}
-interface State {}
+type Props = {
+
+}
 
 
-export default class Product extends Component<Props, State> {
-  render(props, state) {
+export const Product: ComponentType<Props> = () => {
+  
     
+      
     return (
       <div>
           <div>Product name</div>
@@ -17,6 +20,5 @@ export default class Product extends Component<Props, State> {
           <div>Product count</div>
           <BuyButton />
         </div>
-    );
-  }
+    );  
 }

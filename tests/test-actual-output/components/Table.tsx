@@ -1,15 +1,18 @@
 
-import { h, Component } from "preact";
-import TableRow from "./TableRow"
+import * as React from "react";
+import type { ComponentType } from "react";
+import { TableRow } from "./TableRow"
 
 
-interface Props {}
-interface State {}
+type Props = {
+
+}
 
 
-export default class Table extends Component<Props, State> {
-  render(props, state) {
+export const Table: ComponentType<Props> = () => {
+  
     
+      
     return (
       <table>
           <thead>
@@ -23,6 +26,5 @@ export default class Table extends Component<Props, State> {
             <TableRow />
           </tbody>
         </table>
-    );
-  }
+    );  
 }

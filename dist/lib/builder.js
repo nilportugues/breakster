@@ -1,31 +1,37 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t;
-    return { next: verb(0), "throw": verb(1), "return": verb(2) };
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -44,16 +50,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _a;
 exports.__esModule = true;
+exports.TYPE_LAYOUT_CONTENT = exports.TYPE_LAYOUT = void 0;
 var FileSaver_1 = require("./FileSaver");
 var fs = require("async-file");
 var jsdom = require("jsdom");
 var VirtualComponent_1 = require("./VirtualComponent");
 var CodeGenerator_1 = require("./CodeGenerator");
-var BuilderError = (function (_super) {
+var BuilderError = /** @class */ (function (_super) {
     __extends(BuilderError, _super);
     function BuilderError(message) {
-        return _super.call(this, "[project-builder]: " + message) || this;
+        return _super.call(this, "[project-builder]: ".concat(message)) || this;
     }
     return BuilderError;
 }(Error));
@@ -67,7 +75,7 @@ var FILE_EXTENSIONS = (_a = {},
     _a[ALLOWED_LANGUAGES[0]] = "jsx",
     _a[ALLOWED_LANGUAGES[0]] = "tsx",
     _a);
-var Builder = (function () {
+var Builder = /** @class */ (function () {
     function Builder(inputFile, outputFolder, debug) {
         if (debug === void 0) { debug = true; }
         this.debug = false;
@@ -80,7 +88,7 @@ var Builder = (function () {
     }
     Builder.prototype.setLanguage = function (lang) {
         if (!ALLOWED_LANGUAGES.find(function (l) { return l === lang; })) {
-            throw new BuilderError("Language " + lang + " is not supported");
+            throw new BuilderError("Language ".concat(lang, " is not supported"));
         }
     };
     Builder.prototype.build = function () {
@@ -111,7 +119,7 @@ var Builder = (function () {
                     case 3:
                         window = _a.sent();
                         document = window.document;
-                        rootComponentElement = document.body.querySelector("[" + VirtualComponent_1.DEFAULT_COMPONENT_ATTR_NAME + "]");
+                        rootComponentElement = document.body.querySelector("[".concat(VirtualComponent_1.DEFAULT_COMPONENT_ATTR_NAME, "]"));
                         if (!rootComponentElement) {
                             throw new BuilderError("Could not find single element suited for component creation. Check your html.");
                         }
@@ -158,7 +166,7 @@ var Builder = (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         e_2 = _a.sent();
-                        throw new BuilderError("File " + this.inputFile + " does not exist or not available for read");
+                        throw new BuilderError("File ".concat(this.inputFile, " does not exist or not available for read"));
                     case 3:
                         _a.trys.push([3, 5, , 6]);
                         return [4 /*yield*/, fs.stat(this.outputFolder)];
@@ -167,7 +175,7 @@ var Builder = (function () {
                         return [3 /*break*/, 6];
                     case 5:
                         e_3 = _a.sent();
-                        throw new BuilderError("Folder " + this.outputFolder + " is not available for writing or does not exist");
+                        throw new BuilderError("Folder ".concat(this.outputFolder, " is not available for writing or does not exist"));
                     case 6: return [2 /*return*/, true];
                 }
             });
@@ -176,4 +184,3 @@ var Builder = (function () {
     return Builder;
 }());
 exports["default"] = Builder;
-var _a;

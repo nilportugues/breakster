@@ -32,8 +32,8 @@ interface ReactyLibraryInterface {
 }
 
 abstract class ReactyLibrary {
-  // Default dialect is JavaScript
-  protected dialect: Dialect = new JavaScript();
+  // Default dialect is TypeScript
+  protected dialect: Dialect = new TypeScript();
 
   getFactoryFunctionName() { return "" }
 
@@ -81,7 +81,7 @@ class ReactLibrary extends ReactyLibrary {
   }
 
   getName() {
-    return "React";
+    return "react";
   }
 }
 
@@ -141,7 +141,7 @@ export default class ReactyCodeGenerator implements ComponentCodeGeneratorInterf
 
     let dialect = new TypeScript();
     const jsxLibName = el.getAttribute(ATTR_JSX_LIB);
-    this.library = new ReactLibrary(c);
+    this.library = new ReactLibrary();
    
     if (this.library.provideDialect) {
       this.library.provideDialect(dialect);
@@ -225,11 +225,12 @@ import { ${c.getName()} } from "./${c.getName()}"`;
     const l: ReactyLibraryInterface = this.library;
 
     return `
-import { ${this.library.getFactoryFunctionName()}, Component } from "${this.library.getName()}";${additionalImports}
+import * as ${this.library.getFactoryFunctionName()} from "${this.library.getName()}";
+import type { ComponentType } from "${this.library.getName()}";${additionalImports}
 
 ${l.getBeforComponentDeclarationCode()}
 
-export const ${component.getName()}: ComponentType${l.getGenericAfterExtend() = (${l.getRenderArguments()}) => {
+export const ${component.getName()}: ComponentType${l.getGenericAfterExtend()} = (${l.getRenderArguments()}) => {
   
     ${l.getBeforeRenderReturnCode()}
       

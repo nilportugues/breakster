@@ -1,17 +1,20 @@
 
-import { h, Component } from "preact";
-import UserInfo from "./UserInfo"
-import Product from "./Product"
-import Table from "./Table"
+import * as React from "react";
+import type { ComponentType } from "react";
+import { UserInfo } from "./UserInfo"
+import { Product } from "./Product"
+import { Table } from "./Table"
 
 
-interface Props {}
-interface State {}
+type Props = {
+
+}
 
 
-export default class Layout extends Component<Props, State> {
-  render(props, state) {
+export const Layout: ComponentType<Props> = () => {
+  
     
+      
     return (
       <div>
         <header>
@@ -21,6 +24,5 @@ export default class Layout extends Component<Props, State> {
         <Product />
         <Table />
       </div>
-    );
-  }
+    );  
 }
