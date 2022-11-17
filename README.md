@@ -3,13 +3,13 @@
 [![Build Status](https://travis-ci.org/nilportugues/breakster.svg?branch=master)](https://travis-ci.org/nilportugues/breakster)
 
 Tool that breaks your html into React components, saving their
-code into files. Imports of children components, JSX with children components,
+code into files. Imports of children components, TSX with children components,
 etc - you're all set.
 
 ## Installation
 
 ```
-  npm install breakster --global
+npm install breakster --global
 ```
 
 ## Usage
@@ -17,8 +17,7 @@ etc - you're all set.
 Basically:
 
 ```
-   breakster --entry=your_html.html --outDir=/your_directory
-   
+breakster --entry=your_html.html --outDir=/your_directory   
 ```
 
 First, let's observe this example html that will be breaked into files with components code in them.
@@ -75,20 +74,25 @@ First, let's observe this example html that will be breaked into files with comp
 So, you see some attributes that are not your common html attributes.
 With the help of those Breakster knows what should be breaked and saved into components.
 
-In the output folder you would see:
-
-![image](./docs/files.png)
-
-And this is what inside of IndexPage.tsx file:
-
-![image](./docs/code.png)
-
-
 ### Attributes overview
 
 - **b-comp** - main attribute that tells that this is a root element for future component.
 Future component could not live without a name, so b-comp always should be used with b-name.
 - **b-name="ComponentName"** - this attribute defines components name. Name of component class and also name of file, where code will be saved.
+
+## Output
+
+In the output folder you would see:
+
+![image](./docs/files.png)
+
+And this is what inside of LayoutPage.tsx file:
+
+![image](./docs/code.png)
+
+And this is what inside of LayoutPage.test.tsx file:
+
+![image](./docs/test.png)
 
 
 ## Development
