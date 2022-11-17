@@ -76,8 +76,6 @@ With the help of those Breakster knows what should be breaked and saved into com
 
 ### Attributes overview
 
-- **b-comp** - main attribute that tells that this is a root element for future component.
-Future component could not live without a name, so always should be used with b-name.
 - **b-name="ComponentName"** - this attribute defines components name. Name of component class and also name of file, where code will be saved.
 
 ## Output

@@ -8,6 +8,20 @@ describe('BuyButton Component', () => {
   
   it('matches the snapshot', () => {
     const { container } = render(<BuyButton />)
-    expect(container).toMatchInlineSnapshot()
+    expect(container).toMatchInlineSnapshot(`
+<div>
+  <div>
+    <button>
+      buy
+    </button>
+    <div>
+      <div>
+        Buy as
+      </div>
+      <div />
+    </div>
+  </div>
+</div>
+`)
   })
 })
