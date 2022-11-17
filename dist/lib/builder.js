@@ -57,7 +57,6 @@ var FileSaver_1 = require("./FileSaver");
 var fs = require("async-file");
 var jsdom = require("jsdom");
 var VirtualComponent_1 = require("./VirtualComponent");
-var CodeGenerator_1 = require("./CodeGenerator");
 var BuilderError = /** @class */ (function (_super) {
     __extends(BuilderError, _super);
     function BuilderError(message) {
@@ -93,7 +92,7 @@ var Builder = /** @class */ (function () {
     };
     Builder.prototype.build = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var fileContents, window, document, rootComponentElement, codeGenerator, rootComponent, components, fileSaver, i, size, c, e_1;
+            var fileContents, window, document, rootComponentElement, rootComponent, components, fileSaver, i, size, c, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.checkPrerequisites()];
@@ -123,7 +122,6 @@ var Builder = /** @class */ (function () {
                         if (!rootComponentElement) {
                             throw new BuilderError("Could not find single element suited for component creation. Check your html.");
                         }
-                        codeGenerator = new CodeGenerator_1.ReactyCodeGenerator();
                         _a.label = 4;
                     case 4:
                         _a.trys.push([4, 10, , 11]);
@@ -135,7 +133,7 @@ var Builder = /** @class */ (function () {
                     case 5:
                         if (!(i < size)) return [3 /*break*/, 9];
                         c = components[i];
-                        return [4 /*yield*/, fileSaver.save(this.outputFolder, c.getCodeGenerator())];
+                        return [4 /*yield*/, fileSaver.save(this.outputFolder, c.getCodeGenerator(), c.getTestCodeGenerator())];
                     case 6: return [4 /*yield*/, _a.sent()];
                     case 7:
                         _a.sent();

@@ -5,7 +5,8 @@ import VirtualComponent, {
   DEFAULT_COMPONENT_ATTR_NAME,
   VirtualComponentInterface
 } from './VirtualComponent';
-import { ReactyCodeGenerator } from "./CodeGenerator";
+import { ReactyCodeGenerator, TestReactyCodeGenerator } from "./CodeGenerator";
+
 
 
 class BuilderError extends Error {
@@ -80,11 +81,9 @@ class Builder {
       throw new BuilderError("Could not find single element suited for component creation. Check your html.");
     }
 
-    const codeGenerator = new ReactyCodeGenerator();
-
     try {
       const rootComponent = new VirtualComponent(
-        rootComponentElement as HTMLElement,
+        (rootComponentElement as HTMLElement),
         DEFAULT_COMPONENT_ATTR_NAME
       );
 
@@ -95,7 +94,7 @@ class Builder {
       for (let i = 0, size = components.length; i < size; i++) {
         const c = components[i];
 
-        await await fileSaver.save(this.outputFolder, c.getCodeGenerator());
+        await await fileSaver.save(this.outputFolder, c.getCodeGenerator(), c.getTestCodeGenerator());
       }
     } catch (e) {
       console.error(e);

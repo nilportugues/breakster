@@ -17,6 +17,7 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.ATTR_JSX_LIB = exports.ATTR_DIALECT = exports.DEFAULT_COMPONENT_ATTR_NAME = exports.ATTR_ID = exports.ATTR_NAME = void 0;
 var ReactyCodeGenerator_1 = require("./ReactyCodeGenerator");
+var TestReactyCodeGenerator_1 = require("./TestReactyCodeGenerator");
 var VirtualComponentParsingError = /** @class */ (function (_super) {
     __extends(VirtualComponentParsingError, _super);
     function VirtualComponentParsingError() {
@@ -46,8 +47,9 @@ exports.DEFAULT_COMPONENT_ATTR_NAME = "b-comp";
 exports.ATTR_DIALECT = "b-dialect";
 exports.ATTR_JSX_LIB = "b-jsx-lib";
 var VirtualComponent = /** @class */ (function () {
-    function VirtualComponent(el, componentAttr, codeGenerator) {
+    function VirtualComponent(el, componentAttr, codeGenerator, testCodeGenerator) {
         if (codeGenerator === void 0) { codeGenerator = new ReactyCodeGenerator_1["default"](); }
+        if (testCodeGenerator === void 0) { testCodeGenerator = new TestReactyCodeGenerator_1["default"](); }
         // Innter components
         this.children = [];
         if (!componentAttr) {
@@ -62,10 +64,16 @@ var VirtualComponent = /** @class */ (function () {
         this.componentAttr = componentAttr;
         this.codeGenerator = codeGenerator;
         this.codeGenerator.attachComponent(this);
+        this.testCodeGenerator = testCodeGenerator;
+        this.testCodeGenerator.attachComponent(this);
         this.parseRootHTMLElement();
     }
     VirtualComponent.prototype.setCodeGenerator = function (cg) {
         this.codeGenerator = cg;
+        return this;
+    };
+    VirtualComponent.prototype.setTestCodeGenerator = function (cg) {
+        this.testCodeGenerator = cg;
         return this;
     };
     VirtualComponent.prototype.getParent = function () {
@@ -96,6 +104,9 @@ var VirtualComponent = /** @class */ (function () {
     };
     VirtualComponent.prototype.getCodeGenerator = function () {
         return this.codeGenerator;
+    };
+    VirtualComponent.prototype.getTestCodeGenerator = function () {
+        return this.testCodeGenerator;
     };
     VirtualComponent.prototype.findAttributeValueThrouItselfAndParents = function (attr) {
         var value = this.el.getAttribute(attr);

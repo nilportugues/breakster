@@ -70,9 +70,9 @@ var SavingToFileError = /** @class */ (function (_super) {
 var ComponentFileSaver = /** @class */ (function () {
     function ComponentFileSaver() {
     }
-    ComponentFileSaver.prototype.save = function (dir, g /* , t: TestComponentCodeGeneratorInterface */) {
+    ComponentFileSaver.prototype.save = function (dir, g, t) {
         return __awaiter(this, void 0, void 0, function () {
-            var originalDir, saveToDir, folderExists, e_1, fileName, filePath, e_2;
+            var originalDir, saveToDir, folderExists, e_1, fileName, testFileName, filePath, testFilePath, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -102,21 +102,25 @@ var ComponentFileSaver = /** @class */ (function () {
                         throw new FolderCannotBeAccessedError("Tried to access folder ".concat(saveToDir, ", but apparently it doesn't exist or not accessible. More info: above"));
                     case 7:
                         fileName = "".concat(g.getComponent().getName(), ".").concat(g.getFileExtension());
+                        testFileName = "".concat(t.getComponent().getName(), ".").concat(t.getFileExtension());
                         filePath = "".concat(saveToDir, "/").concat(fileName);
+                        testFilePath = "".concat(saveToDir, "/").concat(testFileName);
                         _a.label = 8;
                     case 8:
-                        _a.trys.push([8, 10, , 11]);
+                        _a.trys.push([8, 11, , 12]);
                         return [4 /*yield*/, fs.writeFile(filePath, g.generate())];
                     case 9:
                         _a.sent();
-                        //await fs.writeFile(filePath, t.generate());
-                        console.log("Saved ".concat(filePath));
-                        return [3 /*break*/, 11];
+                        return [4 /*yield*/, fs.writeFile(testFilePath, t.generate())];
                     case 10:
+                        _a.sent();
+                        console.log("Saved ".concat(filePath));
+                        return [3 /*break*/, 12];
+                    case 11:
                         e_2 = _a.sent();
                         console.error(e_2);
                         throw new SavingToFileError("Error saving to ".concat(filePath, ". More - above this error."));
-                    case 11: return [2 /*return*/];
+                    case 12: return [2 /*return*/];
                 }
             });
         });

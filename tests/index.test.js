@@ -1,6 +1,7 @@
 "use strict";
 
 import test from 'ava';
+
 const del = require('del');
 const fs = require('async-file');
 const Builder =  require('../dist/index.js').Builder;

@@ -1,14 +1,14 @@
 import { ComponentCodeGeneratorInterface } from './CodeGenerator';
 import * as fs from "async-file";
 interface FileSaverInterface {
-  save(dir: string, g: ComponentCodeGeneratorInterface /* , t: TestComponentCodeGeneratorInterface */);
+  save(dir: string, g: ComponentCodeGeneratorInterface  , t: ComponentCodeGeneratorInterface );
 }
 
 class FolderCannotBeAccessedError extends Error {}
 class SavingToFileError extends Error {}
 
 export class ComponentFileSaver implements FileSaverInterface {
-  async save(dir: string, g: ComponentCodeGeneratorInterface /* , t: TestComponentCodeGeneratorInterface */) {
+  async save(dir: string, g: ComponentCodeGeneratorInterface  , t: ComponentCodeGeneratorInterface ) {
     let originalDir = dir;
 
     if (originalDir[originalDir.length - 1] === "/") {
@@ -34,14 +34,14 @@ export class ComponentFileSaver implements FileSaverInterface {
     }
 
     const fileName = `${g.getComponent().getName()}.${g.getFileExtension()}`;
-    //const testFileName = `${g.getComponent().getName()}.test.${g.getFileExtension()}`;
+    const testFileName = `${t.getComponent().getName()}.${t.getFileExtension()}`;
 
     const filePath = `${saveToDir}/${fileName}`;
-    //const testFilePath = `${saveToDir}/${fileName}`;
+    const testFilePath = `${saveToDir}/${testFileName}`;
 
     try {
       await fs.writeFile(filePath, g.generate());
-      //await fs.writeFile(filePath, t.generate());
+      await fs.writeFile(testFilePath, t.generate());
 
       console.log(`Saved ${filePath}`);
     } catch (e) {

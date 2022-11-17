@@ -1,5 +1,6 @@
 import { ComponentCodeGeneratorInterface } from './CodeGenerator';
 import ReactyCodeGenerator from "./ReactyCodeGenerator";
+import TestReactyCodeGenerator from "./TestReactyCodeGenerator";
 
 class VirtualComponentParsingError extends Error {}
 class VirtualComponentInvalidElementError extends Error {};
@@ -24,6 +25,7 @@ export interface VirtualComponentInterface {
   getChildren(): VirtualComponentInterface[];
   getParent(): VirtualComponentInterface | undefined;
   getCodeGenerator(): ComponentCodeGeneratorInterface;
+  getTestCodeGenerator(): ComponentCodeGeneratorInterface;
   collectAllSubChildrenAndItself(): VirtualComponentInterface[];
   findAttributeValueThrouItselfAndParents(attr: string): string | undefined;
 }
@@ -44,11 +46,13 @@ export default class VirtualComponent implements VirtualComponentInterface {
   private name: string;
 
   private codeGenerator: ComponentCodeGeneratorInterface; 
+  private testCodeGenerator: ComponentCodeGeneratorInterface; 
 
   constructor(
     el: HTMLElement,
     componentAttr: string,
-    codeGenerator: ComponentCodeGeneratorInterface = new ReactyCodeGenerator()
+    codeGenerator: ComponentCodeGeneratorInterface = new ReactyCodeGenerator(),
+    testCodeGenerator: ComponentCodeGeneratorInterface = new TestReactyCodeGenerator()
   ) {
     if (!componentAttr) {
       throw new VirtualComponentInitializationError(
@@ -69,11 +73,20 @@ export default class VirtualComponent implements VirtualComponentInterface {
     this.codeGenerator = codeGenerator;
     this.codeGenerator.attachComponent(this);
 
+    this.testCodeGenerator = testCodeGenerator;
+    this.testCodeGenerator.attachComponent(this);
+
     this.parseRootHTMLElement();
   }
 
   public setCodeGenerator(cg: ComponentCodeGeneratorInterface): VirtualComponent {
     this.codeGenerator = cg;
+
+    return this;
+  }
+
+  public setTestCodeGenerator(cg: ComponentCodeGeneratorInterface): VirtualComponent {
+    this.testCodeGenerator = cg;
 
     return this;
   }
@@ -116,6 +129,11 @@ export default class VirtualComponent implements VirtualComponentInterface {
 
   public getCodeGenerator(): ComponentCodeGeneratorInterface {
     return this.codeGenerator;
+  }
+
+
+  public getTestCodeGenerator(): ComponentCodeGeneratorInterface {
+    return this.testCodeGenerator;
   }
 
   public findAttributeValueThrouItselfAndParents(attr: string): string | undefined {

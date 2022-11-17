@@ -1,16 +1,14 @@
 
 import * as React from "react";
-import type { ComponentType } from "react";
+
 import { Layout } from "./Layout"
 
-
-type Props = {
+export type IndexPageProps = {
 
 }
 
 
-export const IndexPage: ComponentType<Props> = () => {
-  
+export function IndexPage({ ...props}: IndexPageProps){
     
       
     return (

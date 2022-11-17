@@ -16,7 +16,9 @@ function createCodeGenerator() {
 }
 
 import ReactyCodeGenerator from "./ReactyCodeGenerator";
+import TestReactyCodeGenerator from "./TestReactyCodeGenerator";
 
 export {
-  ReactyCodeGenerator
+  ReactyCodeGenerator,
+  TestReactyCodeGenerator
 }

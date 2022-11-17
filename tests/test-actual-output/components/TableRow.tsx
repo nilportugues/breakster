@@ -1,15 +1,13 @@
 
 import * as React from "react";
-import type { ComponentType } from "react";
 
 
-type Props = {
+export type TableRowProps = {
 
 }
 
 
-export const TableRow: ComponentType<Props> = () => {
-  
+export function TableRow({ ...props}: TableRowProps){
     
       
     return (

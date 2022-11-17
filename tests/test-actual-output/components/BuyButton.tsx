@@ -1,16 +1,14 @@
 
 import * as React from "react";
-import type { ComponentType } from "react";
+
 import { UserInfo } from "./UserInfo"
 
-
-type Props = {
+export type BuyButtonProps = {
 
 }
 
 
-export const BuyButton: ComponentType<Props> = () => {
-  
+export function BuyButton({ ...props}: BuyButtonProps){
     
       
     return (

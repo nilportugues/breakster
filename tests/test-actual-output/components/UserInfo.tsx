@@ -1,15 +1,13 @@
 
 import * as React from "react";
-import type { ComponentType } from "react";
 
 
-type Props = {
+export type UserInfoProps = {
 
 }
 
 
-export const UserInfo: ComponentType<Props> = () => {
-  
+export function UserInfo({ ...props}: UserInfoProps){
     
       
     return (

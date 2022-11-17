@@ -1,18 +1,16 @@
 
 import * as React from "react";
-import type { ComponentType } from "react";
+
 import { UserInfo } from "./UserInfo"
 import { Product } from "./Product"
 import { Table } from "./Table"
 
-
-type Props = {
+export type LayoutProps = {
 
 }
 
 
-export const Layout: ComponentType<Props> = () => {
-  
+export function Layout({ ...props}: LayoutProps){
     
       
     return (
