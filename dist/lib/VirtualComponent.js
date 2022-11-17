@@ -43,7 +43,7 @@ var VirtualComponentInitializationError = /** @class */ (function (_super) {
 ;
 exports.ATTR_NAME = "b-name";
 exports.ATTR_ID = "b-id";
-exports.DEFAULT_COMPONENT_ATTR_NAME = "b-comp";
+exports.DEFAULT_COMPONENT_ATTR_NAME = exports.ATTR_NAME;
 exports.ATTR_DIALECT = "b-dialect";
 exports.ATTR_JSX_LIB = "b-jsx-lib";
 var VirtualComponent = /** @class */ (function () {

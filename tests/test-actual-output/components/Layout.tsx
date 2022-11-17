@@ -1,7 +1,7 @@
 
 import * as React from "react";
 
-import { UserInfo } from "./UserInfo"
+import { LayoutHeader } from "./LayoutHeader"
 import { Product } from "./Product"
 import { Table } from "./Table"
 
@@ -16,12 +16,7 @@ export function Layout({ ...props}: LayoutProps){
     return (
       <div>
 
-        <header>
-          <div>User</div>
-
-          <UserInfo />
-
-        </header>
+        <LayoutHeader />
 
         <Product />
 

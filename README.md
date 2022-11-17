@@ -29,27 +29,27 @@ First, let's observe this example html that will be breaked into files with comp
     <title></title>
   </head>
   <body>
-    <div b-comp b-name="IndexPage">
-      <div b-comp b-name="Layout">
+    <div b-name="IndexPage">
+      <div b-name="Layout">
         <header>
           <div>User</div>
-          <div b-comp b-name="UserInfo">
+          <div b-name="UserInfo">
             <div class="user-info-class">Username: Alan</div>
           </div>
         </header>
-        <div b-comp b-name="Product">
+        <div b-name="Product">
           <div>Product name</div>
           <div>Product price</div>
           <div>Product count</div>
-          <div b-comp b-jsx-lib="react" b-name="BuyButton">
+          <div b-jsx-lib="react" b-name="BuyButton">
             <button>buy</button>
             <div>
               <div>Buy as</div>
-              <div b-comp b-name="UserInfo"></div>
+              <div b-name="UserInfo"></div>
             </div>
           </div>
         </div>
-        <table b-comp b-name="Table">
+        <table b-name="Table">
           <thead>
             <tr>
               <td>Header first</td>
@@ -58,7 +58,7 @@ First, let's observe this example html that will be breaked into files with comp
             </tr>
           </thead>
           <tbody>
-            <tr b-comp b-name="TableRow">
+            <tr b-name="TableRow">
               <td>First</td>
               <td>Second</td>
               <td>Third</td>
@@ -77,7 +77,7 @@ With the help of those Breakster knows what should be breaked and saved into com
 ### Attributes overview
 
 - **b-comp** - main attribute that tells that this is a root element for future component.
-Future component could not live without a name, so b-comp always should be used with b-name.
+Future component could not live without a name, so always should be used with b-name.
 - **b-name="ComponentName"** - this attribute defines components name. Name of component class and also name of file, where code will be saved.
 
 ## Output

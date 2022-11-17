@@ -8,31 +8,6 @@ describe('Product Component', () => {
   
   it('matches the snapshot', () => {
     const { container } = render(<Product />)
-    expect(container).toMatchInlineSnapshot(`
-<div>
-  <div>
-    <div>
-      Product name
-    </div>
-    <div>
-      Product price
-    </div>
-    <div>
-      Product count
-    </div>
-    <div>
-      <button>
-        buy
-      </button>
-      <div>
-        <div>
-          Buy as
-        </div>
-        <div />
-      </div>
-    </div>
-  </div>
-</div>
-`)
+    expect(container).toMatchInlineSnapshot()
   })
 })

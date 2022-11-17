@@ -9,7 +9,7 @@ class VirtualComponentInitializationError extends Error {};
 
 export const ATTR_NAME = "b-name";
 export const ATTR_ID = "b-id";
-export const DEFAULT_COMPONENT_ATTR_NAME = "b-comp";
+export const DEFAULT_COMPONENT_ATTR_NAME = ATTR_NAME;
 export const ATTR_DIALECT = "b-dialect";
 export const ATTR_JSX_LIB = "b-jsx-lib";
 
