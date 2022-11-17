@@ -77,11 +77,11 @@ With the help of those Breakster knows what should be breaked and saved into com
 
 In the output folder you would see:
 
-![image](https://cloud.githubusercontent.com/assets/4563032/24829271/181fd4c2-1c77-11e7-993f-e6852cdad656.png)
+![image](./docs/files.png)
 
 And this is what inside of IndexPage.tsx file:
 
-![image](https://cloud.githubusercontent.com/assets/4563032/24930721/3579403c-1f13-11e7-9948-447550141c7f.png)
+![image](./docs/code.png)
 
 
 ### Attributes overview
