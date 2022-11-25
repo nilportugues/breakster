@@ -42,10 +42,15 @@ export const transformFile = (inputDir, sourceDir, outputDir, isDry, fileName) =
       traverse(ast, relativeImportPlugin(babel).visitor, null, state);
     }
 
-    const { code } = generate(ast, generatorOptions);
+    let { code } = generate(ast, generatorOptions);
     const relativePath = path.relative(inputDir, fileName);
     const outputFilePath = path.join(outputDir, relativePath);
     mkdirp.sync(path.dirname(outputFilePath));
+
+    if (code.includes(`react-i18next`)) {
+      code = code.replace('return ', `const { t } = useTranslation();\n\nreturn `)
+    }
+
     fs.writeFileSync(outputFilePath, code);
   } catch (err) {
     console.error('Error for file:', fileName);

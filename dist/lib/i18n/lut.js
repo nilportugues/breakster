@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
-exports.getUniqueKeyFromFreeText = exports.LutManager = exports.lutToLanguageCodeHelper = void 0;
+exports.getUniqueKeyFromFreeTextReturn = exports.getUniqueKeyFromFreeText = exports.LutManager = exports.lutToLanguageCodeHelper = void 0;
 var MAX_ITERATIONS = 1000;
 var lut = {};
 var DEFAULT_MAX_LENGTH = 30;
@@ -58,3 +58,16 @@ var getUniqueKeyFromFreeText = function (text) {
     return key;
 };
 exports.getUniqueKeyFromFreeText = getUniqueKeyFromFreeText;
+var getUniqueKeyFromFreeTextReturn = function (text) {
+    var maybeDuplicateKey = text.toLowerCase();
+    var key = maybeDuplicateKey;
+    for (var i = 1; i < MAX_ITERATIONS; i += 1) {
+        if (lut[key] === text || lut[key] === undefined) {
+            break;
+        }
+        key = "".concat(maybeDuplicateKey).concat(i);
+    }
+    lut[key] = text;
+    return key;
+};
+exports.getUniqueKeyFromFreeTextReturn = getUniqueKeyFromFreeTextReturn;

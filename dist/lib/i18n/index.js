@@ -40,6 +40,9 @@ var transformFile = function (inputDir, sourceDir, outputDir, isDry, fileName) {
         var relativePath = path.relative(inputDir, fileName);
         var outputFilePath = path.join(outputDir, relativePath);
         mkdirp.sync(path.dirname(outputFilePath));
+        if (code.includes("react-i18next")) {
+            code = code.replace('return ', "const { t } = useTranslation();\n\nreturn ");
+        }
         fs.writeFileSync(outputFilePath, code);
     }
     catch (err) {

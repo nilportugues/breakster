@@ -47,17 +47,13 @@ exports["default"] = (function (_a) {
                             });
                         }
                     });
-                    /*
                     // Do not add imports if there is no replaceable text
                     // in this file
                     if (LutManager.getUniqueKeyFromFreeTextNumCalls > 0) {
-                      if (!this.alreadyImportedK) {
-                        programPath.node.body.unshift(_.cloneDeep(kImportStatement));
-                      }
-                      if (!this.alreadyImportedi18n) {
-                        programPath.node.body.unshift(_.cloneDeep(i18nextImportStatement));
-                      }
-                    }*/
+                        if (!this.alreadyImportedi18n) {
+                            programPath.node.body.unshift(_.cloneDeep(i18nextImportStatement));
+                        }
+                    }
                 }
             },
             ImportDeclaration: {

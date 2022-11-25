@@ -1,3 +1,5 @@
+import { getUniqueKeyFromFreeTextReturn } from "./lut";
+
 const _ = require('lodash');
 
 const {
@@ -52,17 +54,15 @@ export default ({ types: t }) => ({
             });
           }
         });
-        /*
+        
         // Do not add imports if there is no replaceable text
         // in this file
         if (LutManager.getUniqueKeyFromFreeTextNumCalls > 0) {
-          if (!this.alreadyImportedK) {
-            programPath.node.body.unshift(_.cloneDeep(kImportStatement));
-          }
+          
           if (!this.alreadyImportedi18n) {
             programPath.node.body.unshift(_.cloneDeep(i18nextImportStatement));
           }
-        }*/
+        }
       },
     },
     ImportDeclaration: {
@@ -111,6 +111,7 @@ export default ({ types: t }) => ({
             // TODO: Replace the path instead of modifying the raw
             qPath.node.value.raw = qPath.node.value.raw.replace(coreValue, `\${t('${kValue}')}`);
             qPath.node.value.cooked = qPath.node.value.cooked.replace(coreValue, `\${t('${kValue}')}`);
+
           }
         });
       },
@@ -151,6 +152,7 @@ export default ({ types: t }) => ({
         const coreValue = _.get(path, 'node.value', '').trim();
         if (!coreValue.length) return;
         const kValue = getUniqueKeyFromFreeText(coreValue);
+        
         // TODO: OPTIMIZATION: Use quasi quotes to optimize this
         path.node.value = path.node.value.replace(coreValue, `{t('${kValue}')}`);
       },

@@ -50,3 +50,17 @@ export const getUniqueKeyFromFreeText = (text) => {
   return key;
 };
 
+
+export const getUniqueKeyFromFreeTextReturn = (text) => {
+
+  let maybeDuplicateKey = text.toLowerCase()
+
+  let key = maybeDuplicateKey;
+  for (let i = 1; i < MAX_ITERATIONS; i += 1) {
+    if (lut[key] === text || lut[key] === undefined) { break; }
+    key = `${maybeDuplicateKey}${i}`;
+  }
+  lut[key] = text;
+
+  return key;
+};

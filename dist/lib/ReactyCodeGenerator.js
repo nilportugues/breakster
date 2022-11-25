@@ -198,7 +198,7 @@ var ReactyCodeGenerator = /** @class */ (function () {
             jsx = jsx.replace(r.search, r.replace);
         });
         var l = this.library;
-        return "\nimport * as ".concat(this.library.getFactoryFunctionName(), " from \"").concat(this.library.getName(), "\";\n").concat(additionalImports, "\n").concat(l.getBeforComponentDeclarationCode(component.getName()), "\n\nexport const ").concat(component.getName(), " = React.memo(function ({").concat(l.getRenderArguments() ? "".concat(l.getRenderArguments(), ",") : '', " ...props}: ").concat(component.getName(), "Props){\n    ").concat(l.getBeforeRenderReturnCode(), "\n      \n    return (\n      ").concat(jsx, "\n    );  \n})\n");
+        return "\nimport * as ".concat(this.library.getFactoryFunctionName(), " from \"").concat(this.library.getName(), "\";\n").concat(additionalImports, "\n").concat(l.getBeforComponentDeclarationCode(component.getName()), "\n\nexport const ").concat(component.getName(), " = React.memo(function ({").concat(l.getRenderArguments() ? "".concat(l.getRenderArguments(), ",") : '', " ...props}: ").concat(component.getName(), "Props){\n    ").concat(l.getBeforeRenderReturnCode(), "\n\n    return (\n      ").concat(jsx, "\n    );  \n})\n");
     };
     ReactyCodeGenerator.prototype.getComponent = function () {
         return this.component;

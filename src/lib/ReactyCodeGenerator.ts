@@ -234,7 +234,7 @@ ${l.getBeforComponentDeclarationCode(component.getName())}
 
 export const ${component.getName()} = React.memo(function ({${l.getRenderArguments() ? `${l.getRenderArguments()},`: ''} ...props}: ${component.getName()}Props){
     ${l.getBeforeRenderReturnCode()}
-      
+
     return (
       ${jsx}
     );  

@@ -1,4 +1,4 @@
-
+import { useTranslation } from 'react-i18next';
 import * as React from "react";
 
 import { TableRow } from "./TableRow";
@@ -11,7 +11,9 @@ export type TableProps = {};
 export const Table = React.memo(function ({ ...props }: TableProps) {
 
 
-  return (
+  const { t } = useTranslation();
+
+return (
     <table>
           <thead>
             <tr>
