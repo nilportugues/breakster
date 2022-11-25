@@ -2,6 +2,8 @@ import Builder from "./lib/builder";
 import VirtualComponent from "./lib/VirtualComponent";
 import * as minimist from "minimist";
 import * as path from "path";
+import { mkdirSync } from "fs";
+
 
 export {
   Builder,
@@ -29,6 +31,12 @@ function processFromCLI() {
 
   let { entry, outDir, language } = argv;
 
+  try {
+    mkdirSync(currentDir + "/" + outDir)
+  } catch (e) {
+
+  }
+
   if (!path.isAbsolute(entry)) {
     entry = currentDir + "/" + entry;
   }
@@ -37,6 +45,9 @@ function processFromCLI() {
     outDir = currentDir + "/" + outDir;
   }
 
+  
+  
+
   const builder = new Builder(entry, outDir, false);
 
   if (language) {
@@ -44,6 +55,8 @@ function processFromCLI() {
   }
 
   builder.build();
+
+
 }
 
 if (require.main === module) {

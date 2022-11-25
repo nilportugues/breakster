@@ -1,20 +1,20 @@
 
 import * as React from "react";
 
-import { LayoutHeader } from "./LayoutHeader"
-import { Product } from "./Product"
-import { Table } from "./Table"
+import { LayoutHeader } from "./LayoutHeader";
+import { Product } from "./Product";
+import { Table } from "./Table";
 
-export type LayoutProps = {
-
-}
+export type LayoutProps = {};
 
 
-export function Layout({ ...props}: LayoutProps){
-    
-      
-    return (
-      <div>
+
+
+export const Layout = React.memo(function ({ ...props }: LayoutProps) {
+
+
+  return (
+    <div>
 
         <LayoutHeader />
 
@@ -23,6 +23,6 @@ export function Layout({ ...props}: LayoutProps){
         <Table />
 
         <Table />
-      </div>
-    );  
-}
+      </div>);
+
+});

@@ -1,24 +1,24 @@
 
 import * as React from "react";
 
-import { UserInfo } from "./UserInfo"
+import { UserInfo } from "./UserInfo";
 
-export type BuyButtonProps = {
-
-}
+export type BuyButtonProps = {};
 
 
-export function BuyButton({ ...props}: BuyButtonProps){
-    
-      
-    return (
-      <div>
-            <button>buy</button>
+
+
+export const BuyButton = React.memo(function ({ ...props }: BuyButtonProps) {
+
+
+  return (
+    <div>
+            <button>{t('buy')}</button>
             <div>
-              <div>Buy as</div>
+              <div>{t('buy_as')}</div>
               
               <UserInfo />
             </div>
-          </div>
-    );  
-}
+          </div>);
+
+});

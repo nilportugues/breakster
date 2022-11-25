@@ -1,3 +1,4 @@
+
 import { ComponentFileSaver } from './FileSaver';
 import * as fs from "async-file";
 import * as jsdom from "jsdom";
@@ -5,8 +6,11 @@ import VirtualComponent, {
   DEFAULT_COMPONENT_ATTR_NAME,
   VirtualComponentInterface
 } from './VirtualComponent';
-import { ReactyCodeGenerator, TestReactyCodeGenerator } from "./CodeGenerator";
 
+import * as path from 'path'
+import { transformFile } from './i18n/index';
+import { walk } from './i18n/walker'
+import { LutManager } from './i18n/lut'
 
 
 class BuilderError extends Error {
@@ -23,18 +27,13 @@ const ALLOWED_LANGUAGES = [
   "typescript"
 ];
 
-const FILE_EXTENSIONS = {
-  [ALLOWED_LANGUAGES[0]]: "jsx",
-  [ALLOWED_LANGUAGES[0]]: "tsx"
-};
-
 class Builder {
   private inputFile: string;
   private outputFolder: string;
   private debug: boolean = false;
 
   constructor(inputFile: string, outputFolder: string, debug = true) {
-    if (!inputFile || !outputFolder) {
+    if (!(inputFile && outputFolder)) {
       throw new BuilderError("You must pass inputFile and outputFolder in Builder constructor");
     }
 
@@ -102,53 +101,26 @@ class Builder {
       throw new BuilderError("There was an error while build process was active. Above - more info on error.");
     }
 
-    // await componentElements.forEach(async (el: HTMLElement) => {
-    //   try {
-    //     const name: string = el.getAttribute("name");
 
-    //     // Custom layout content handling
-    //     if (TYPE_LAYOUT_CONTENT === el.getAttribute("type")) {
-    //       return;
-    //     }
+      const inputDir = path.dirname(this.inputFile)
+      const transsourceDir = '.'; 
 
-    //     // If component has no children and has name of already
-    //     // created Component, omit it
-    //     if (components.find(c => c.getName() === name) && !el.childNodes.length) {
-    //       return;
-    //     }
+      /*
+      // If running this script for the second time, it should not
+      // discard the table generated from the first run
+      if (await fs.exists(path.join(path.resolve(this.outputFolder), `${transsourceDir}/i18n/english.js`))) {
+        console.log('english.js exists');
+        // eslint-disable-next-line
+        const oldLut = require(path.join(path.resolve(this.outputFolder), `${transsourceDir}/i18n/english`));
+        (LutManager as any).setLut(oldLut);
+      }
+      */
 
-    //     this.validateComponentElement(el);
-
-    //     // TODO: provide component with attributes for further extending component
-    //     const component = new Component(name, this.language);
-
-    //     component.processHTMLElement(el, this.tag, document);
-
-    //     components.push(component);
-
-    //     if (this.debug) {
-    //       console.log(component.generateCode());
-    //     } else {
-    //       // Using output folder
-    //       let outDir = this.outputFolder;
-    //       let componentOutDir = outDir[outDir.length - 1] === "/" ? outDir + "components/" : outDir + "/components/";
-
-    //       await fs.writeFile(
-    //         componentOutDir + `${name}.${FILE_EXTENSIONS[this.language]}`,
-    //         component.generateCode()
-    //       );
-    //     }
-
-    //     // Saving component output into file
-        
-    //   } catch (e) {
-    //     console.error(e.stack);
-
-    //     throw new BuilderError(
-    //       `Something gone wrong in the building process. Loggin error info before this error.`
-    //     );
-    //   }
-    // }, this);
+      const allFiles = walk(path.join(path.resolve(inputDir), transsourceDir));
+     
+      allFiles.forEach(fileName => {
+        transformFile(inputDir, '.', path.resolve(this.outputFolder+"/../"), false, fileName)
+      });
   }
 
   private async checkPrerequisites() {

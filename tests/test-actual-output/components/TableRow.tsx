@@ -2,19 +2,19 @@
 import * as React from "react";
 
 
-export type TableRowProps = {
-
-}
+export type TableRowProps = {};
 
 
-export function TableRow({ ...props}: TableRowProps){
-    
-      
-    return (
-      <tr>
-              <td>First</td>
-              <td>Second</td>
-              <td>Third</td>
-            </tr>
-    );  
-}
+
+
+export const TableRow = React.memo(function ({ ...props }: TableRowProps) {
+
+
+  return (
+    <tr>
+              <td>{t('first')}</td>
+              <td>{t('second')}</td>
+              <td>{t('third')}</td>
+            </tr>);
+
+});

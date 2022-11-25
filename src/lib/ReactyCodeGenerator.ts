@@ -232,13 +232,13 @@ import * as ${this.library.getFactoryFunctionName()} from "${this.library.getNam
 ${additionalImports}
 ${l.getBeforComponentDeclarationCode(component.getName())}
 
-export function ${component.getName()}({${l.getRenderArguments() ? `${l.getRenderArguments()},`: ''} ...props}: ${component.getName()}Props){
+export const ${component.getName()} = React.memo(function ({${l.getRenderArguments() ? `${l.getRenderArguments()},`: ''} ...props}: ${component.getName()}Props){
     ${l.getBeforeRenderReturnCode()}
       
     return (
       ${jsx}
     );  
-}
+})
 `;
   }
 

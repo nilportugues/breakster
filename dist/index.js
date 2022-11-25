@@ -7,6 +7,7 @@ var VirtualComponent_1 = require("./lib/VirtualComponent");
 exports.VirtualComponent = VirtualComponent_1["default"];
 var minimist = require("minimist");
 var path = require("path");
+var fs_1 = require("fs");
 function processFromCLI() {
     // This is from console
     var argv = minimist(process.argv.slice(2));
@@ -20,6 +21,11 @@ function processFromCLI() {
     }
     var currentDir = process.cwd();
     var entry = argv.entry, outDir = argv.outDir, language = argv.language;
+    try {
+        (0, fs_1.mkdirSync)(currentDir + "/" + outDir);
+    }
+    catch (e) {
+    }
     if (!path.isAbsolute(entry)) {
         entry = currentDir + "/" + entry;
     }

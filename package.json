@@ -1,12 +1,13 @@
 {
-  "name": "@nilportugues/breakster",
+  "name": "nilportugues-breakster",
   "version": "0.1.6",
   "description": "Tool that breaks your html into React components, saving their code into files.",
   "main": "index.js",
   "scripts": {
     "build": "tsc -p \"./src\" -w",
     "test": "tsc -p \"./src\" && ava ./tests/index.test.js --verbose",
-    "test:generated": "jest ./tests/test-actual-output/components/*.test.tsx "
+    "test:generated": "jest ./tests/test-actual-output/components/*.test.tsx ",
+    "test:i18n": " node ./src/lib/i18n/index.js  ./tests ./tests/out ./test-actual-output"
   },
   "repository": "https://github.com/nilportugues/breakster",
   "bin": "dist/index.js",
@@ -15,10 +16,17 @@
   "dependencies": {
     "async-file": "^2.0.2",
     "jsdom": "^9.12.0",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "@babel/core": "^7.4.4",
+    "@babel/generator": "^7.4.4",
+    "@babel/parser": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/traverse": "^7.4.4",
+    "babel-project-relative-import": "^2.0.1",
+    "lodash": "^4.17.11",
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-   
     "@jest/globals": "^29.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

@@ -50,13 +50,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _a;
 exports.__esModule = true;
 exports.TYPE_LAYOUT_CONTENT = exports.TYPE_LAYOUT = void 0;
 var FileSaver_1 = require("./FileSaver");
 var fs = require("async-file");
 var jsdom = require("jsdom");
 var VirtualComponent_1 = require("./VirtualComponent");
+var path = require("path");
+var index_1 = require("./i18n/index");
+var walker_1 = require("./i18n/walker");
 var BuilderError = /** @class */ (function (_super) {
     __extends(BuilderError, _super);
     function BuilderError(message) {
@@ -70,15 +72,11 @@ var ALLOWED_LANGUAGES = [
     "javascript",
     "typescript"
 ];
-var FILE_EXTENSIONS = (_a = {},
-    _a[ALLOWED_LANGUAGES[0]] = "jsx",
-    _a[ALLOWED_LANGUAGES[0]] = "tsx",
-    _a);
 var Builder = /** @class */ (function () {
     function Builder(inputFile, outputFolder, debug) {
         if (debug === void 0) { debug = true; }
         this.debug = false;
-        if (!inputFile || !outputFolder) {
+        if (!(inputFile && outputFolder)) {
             throw new BuilderError("You must pass inputFile and outputFolder in Builder constructor");
         }
         this.inputFile = inputFile;
@@ -92,7 +90,8 @@ var Builder = /** @class */ (function () {
     };
     Builder.prototype.build = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var fileContents, window, document, rootComponentElement, rootComponent, components, fileSaver, i, size, c, e_1;
+            var fileContents, window, document, rootComponentElement, rootComponent, components, fileSaver, i, size, c, e_1, inputDir, transsourceDir, allFiles;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.checkPrerequisites()];
@@ -146,7 +145,14 @@ var Builder = /** @class */ (function () {
                         e_1 = _a.sent();
                         console.error(e_1);
                         throw new BuilderError("There was an error while build process was active. Above - more info on error.");
-                    case 11: return [2 /*return*/];
+                    case 11:
+                        inputDir = path.dirname(this.inputFile);
+                        transsourceDir = '.';
+                        allFiles = (0, walker_1.walk)(path.join(path.resolve(inputDir), transsourceDir));
+                        allFiles.forEach(function (fileName) {
+                            (0, index_1.transformFile)(inputDir, '.', path.resolve(_this.outputFolder + "/../"), false, fileName);
+                        });
+                        return [2 /*return*/];
                 }
             });
         });

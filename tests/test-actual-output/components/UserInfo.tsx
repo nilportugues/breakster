@@ -2,15 +2,15 @@
 import * as React from "react";
 
 
-export type UserInfoProps = {
-
-}
+export type UserInfoProps = {};
 
 
-export function UserInfo({ ...props}: UserInfoProps){
-    
-      
-    return (
-      <div></div>
-    );  
-}
+
+
+export const UserInfo = React.memo(function ({ ...props }: UserInfoProps) {
+
+
+  return (
+    <div></div>);
+
+});
