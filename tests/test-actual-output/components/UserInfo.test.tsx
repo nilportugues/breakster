@@ -8,6 +8,10 @@ describe('UserInfo Component', () => {
   
   it('matches the snapshot', () => {
     const { container } = render(<UserInfo />)
-    expect(container).toMatchInlineSnapshot()
+    expect(container).toMatchInlineSnapshot(`
+<div>
+  <div />
+</div>
+`)
   })
 })

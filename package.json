@@ -6,24 +6,23 @@
   "scripts": {
     "build": "tsc -p \"./src\" -w",
     "test": "tsc -p \"./src\" && ava ./tests/index.test.js --verbose",
-    "test:generated": "jest ./tests/test-actual-output/components/*.test.tsx ",
-    "test:i18n": " node ./src/lib/i18n/index.js  ./tests ./tests/out ./test-actual-output"
+    "test:generated": "jest ./tests/test-actual-output/components/*.test.tsx "
   },
   "repository": "https://github.com/nilportugues/breakster",
   "bin": "dist/index.js",
   "author": "nilportugues",
   "license": "MIT",
   "dependencies": {
-    "async-file": "^2.0.2",
-    "jsdom": "^9.12.0",
-    "minimist": "^1.2.0",
     "@babel/core": "^7.4.4",
     "@babel/generator": "^7.4.4",
     "@babel/parser": "^7.4.4",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/traverse": "^7.4.4",
+    "async-file": "^2.0.2",
     "babel-project-relative-import": "^2.0.1",
+    "jsdom": "^9.12.0",
     "lodash": "^4.17.11",
+    "minimist": "^1.2.0",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
@@ -41,6 +40,7 @@
     "jest-environment-jsdom": "^29.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^12.0.0",
     "ts-jest": "^29.0.3",
     "typescript": "^4.9.3"
   }

@@ -8,6 +8,15 @@ describe('LayoutHeader Component', () => {
   
   it('matches the snapshot', () => {
     const { container } = render(<LayoutHeader />)
-    expect(container).toMatchInlineSnapshot()
+    expect(container).toMatchInlineSnapshot(`
+<div>
+  <header>
+    <div>
+      user
+    </div>
+    <div />
+  </header>
+</div>
+`)
   })
 })
