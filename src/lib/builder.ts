@@ -119,7 +119,7 @@ class Builder {
       const allFiles = walk(path.join(path.resolve(inputDir), transsourceDir));
      
       allFiles.forEach(fileName => {
-        transformFile(inputDir, '.', path.resolve(this.outputFolder+"/../"), false, fileName)
+        transformFile(inputDir, '.', path.resolve(`${this.outputFolder}/../`), false, fileName)
       });
   }
 

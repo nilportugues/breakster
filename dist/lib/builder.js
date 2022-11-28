@@ -150,7 +150,7 @@ var Builder = /** @class */ (function () {
                         transsourceDir = '.';
                         allFiles = (0, walker_1.walk)(path.join(path.resolve(inputDir), transsourceDir));
                         allFiles.forEach(function (fileName) {
-                            (0, index_1.transformFile)(inputDir, '.', path.resolve(_this.outputFolder + "/../"), false, fileName);
+                            (0, index_1.transformFile)(inputDir, '.', path.resolve("".concat(_this.outputFolder, "/../")), false, fileName);
                         });
                         return [2 /*return*/];
                 }

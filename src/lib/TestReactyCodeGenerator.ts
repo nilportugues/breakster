@@ -184,11 +184,14 @@ import * as ${this.library.getFactoryFunctionName()} from "${this.library.getNam
 import {${component.getName()}} from "./${component.getName()}";
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { I18nextProvider } from 'react-i18next';
+
+const i18n = undefined;
 
 describe('${component.getName()} Component', () => {
   
   it('matches the snapshot', () => {
-    const { container } = render(<${component.getName()} />)
+    const { container } = render(<I18nextProvider i18n={i18n}><${component.getName()} /></I18nextProvider>)
     expect(container).toMatchInlineSnapshot()
   })
 })

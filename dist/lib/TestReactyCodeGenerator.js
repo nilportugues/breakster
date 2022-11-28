@@ -159,7 +159,7 @@ var TestReactyCodeGenerator = /** @class */ (function () {
             jsx = jsx.replace(r.search, r.replace);
         });
         var l = this.library;
-        return "\nimport * as ".concat(this.library.getFactoryFunctionName(), " from \"").concat(this.library.getName(), "\";\nimport {").concat(component.getName(), "} from \"./").concat(component.getName(), "\";\nimport { render } from '@testing-library/react'\nimport '@testing-library/jest-dom'\n\ndescribe('").concat(component.getName(), " Component', () => {\n  \n  it('matches the snapshot', () => {\n    const { container } = render(<").concat(component.getName(), " />)\n    expect(container).toMatchInlineSnapshot()\n  })\n})\n");
+        return "\nimport * as ".concat(this.library.getFactoryFunctionName(), " from \"").concat(this.library.getName(), "\";\nimport {").concat(component.getName(), "} from \"./").concat(component.getName(), "\";\nimport { render } from '@testing-library/react'\nimport '@testing-library/jest-dom'\nimport { I18nextProvider } from 'react-i18next';\n\nconst i18n = undefined;\n\ndescribe('").concat(component.getName(), " Component', () => {\n  \n  it('matches the snapshot', () => {\n    const { container } = render(<I18nextProvider i18n={i18n}><").concat(component.getName(), " /></I18nextProvider>)\n    expect(container).toMatchInlineSnapshot()\n  })\n})\n");
     };
     TestReactyCodeGenerator.prototype.getComponent = function () {
         return this.component;
