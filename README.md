@@ -1,6 +1,6 @@
-# Breakster
+# html2tsx
 
-[![Build Status](https://travis-ci.org/nilportugues/breakster.svg?branch=master)](https://travis-ci.org/nilportugues/breakster)
+[![Build Status](https://travis-ci.org/nilportugues/html2tsx.svg?branch=master)](https://travis-ci.org/nilportugues/html2tsx)
 
 Tool that breaks your html into React components, saving their
 code into files. Imports of children components, TSX with children components,
@@ -9,7 +9,7 @@ etc - you're all set.
 ## Installation
 
 ```
-npm install breakster --global
+npm install html2tsx --global
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ npm install breakster --global
 Basically:
 
 ```
-breakster --entry=your_html.html --outDir=/your_directory   
+html2tsx --entry=your_html.html --outDir=/your_directory   
 ```
 
 First, let's observe this example html that will be breaked into files with components code in them.
@@ -72,7 +72,7 @@ First, let's observe this example html that will be breaked into files with comp
 ```
 
 So, you see some attributes that are not your common html attributes.
-With the help of those Breakster knows what should be breaked and saved into components.
+With the help of those html2tsx knows what should be breaked and saved into components.
 
 ### Attributes overview
 
@@ -99,7 +99,7 @@ Issues, tests and ideas are welcome!
 
 ## Contributing
 
-1. Fork it ( https://github.com/nilportugues/breakster/fork )
+1. Fork it ( https://github.com/nilportugues/html2tsx/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)

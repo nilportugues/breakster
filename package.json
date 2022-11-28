@@ -1,5 +1,5 @@
 {
-  "name": "nilportugues-breakster",
+  "name": "html2tsx",
   "version": "0.1.6",
   "description": "Tool that breaks your html into React components, saving their code into files.",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "test": "tsc -p \"./src\" && ava ./tests/index.test.js --verbose",
     "test:generated": "jest ./tests/test-actual-output/components/*.test.tsx "
   },
-  "repository": "https://github.com/nilportugues/breakster",
+  "repository": "https://github.com/nilportugues/html2tsx",
   "bin": "dist/index.js",
   "author": "nilportugues",
   "license": "MIT",
